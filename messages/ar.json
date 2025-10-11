@@ -1,0 +1,161 @@
+{
+  "articles": {
+    "title": "المقالات",
+    "new-article": "مقال جديد",
+    "no-articles-message": "لا توجد مقالات بعد ...",
+    "article": {
+      "not-found-message": "لا يوجد مقال بهذا المعرف.",
+      "article-deleted": "تم حذف المقال بنجاح.",
+      "delete-error": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+      "back-to-articles": "العودة إلى قائمة المقالات",
+      "cover-image-alt": "صورة الغلاف",
+      "published": "تم نشر",
+      "not-published": "غير منشور",
+      "delete-article": "حذف المقال",
+      "edit-article": "تعديل المقال",
+      "download-pdf": "تحميل المقال كملف PDF",
+      "confirm-delete-message": "هل أنت متأكد من خذف هذه المقالة, يمكنك التراجع عن عملية الحذف بالنقر على زر الإلغاء",
+      "drag-to-reorder": "اسحب لإعادة الترتيب"
+    },
+    "article-form": {
+      "article-form": "نموذج المقال",
+      "title": "العنوان",
+      "title-placeholder": "أدخل عنوان المقال",
+      "cover-image": "صورة الغلاف",
+      "cover-image-placeholder": "قم بتحميل صورة الغلاف",
+      "cover-preview-alt": "معاينة صورة الغلاف",
+      "category": "التصنيف",
+      "date": "تاريخ النشر",
+      "date-placeholder": "اختر تاريخ النشر",
+      "tags": "العلامات",
+      "tags-placeholder": "لم يتم اختيار أي علامات",
+      "published": "منشور",
+      "un-published": "غير منشور",
+      "confirm": "تأكيد",
+      "loading": "جارٍ التحميل...",
+      "success-add": "تم إضافة المقال بنجاح!",
+      "success-update": "تم تحديث المقال بنجاح!",
+      "ckeditor-placeholder": "اكتب وصفا للمقال",
+      "empty-cover-image": "يجب تحديد صورة للمنشور"
+    }
+  },
+  "settings": {
+    "setting-title": "الإعدادات",
+    "user-information-title": "معلومات المستخدم",
+    "system-title": "النظام",
+    "userAvatar": {
+      "update-image-success": "تم تحديث الصورة بنجاح",
+      "error-setting-user-image": "حدث خطأ أثناء تعيين صورة المستخدم",
+      "image-removed-success": "تم حذف الصورة بنجاح",
+      "upload-image": "رفع الصورة",
+      "remove-image": "حذف الصورة",
+      "user-image-label": "صورة المستخدم",
+      "success-update-userName": "تم تحديث اسم المستخدم بنجاح.",
+      "error-user-name-empty": "أسم المسخدم لايمكن ان يكون فارغ"
+    },
+    "userInfo": {
+      "email-label": "البريد الإلكتروني",
+      "password-label": "كلمة المرور",
+      "edit": "تعديل",
+      "cancel": "إلغاء",
+      "apply": "تطبيق",
+      "update-success": "تم تحديث معلومات المستخدم بنجاح",
+      "error-gmail-already-used": "هذا الإيميل مستخدم بالفعل"
+    },
+    "systemSettings": {
+      "language": "اللغة",
+      "language-desc": "اختر لغتك المفضلة للتطبيق.",
+      "language-toggle": "تبديل اللغة",
+      "theme": "المظهر",
+      "theme-desc": "التبديل بين الوضع الفاتح والداكن.",
+      "theme-toggle": "تبديل المظهر"
+    }
+  },
+  "sidebar": {
+    "title": "متجر المقالات",
+    "articles-linke": "المقالات",
+    "stats-linke": "الإحصائيات",
+    "working-hours-linke": "اوقات الدوام",
+    "setting-linke": "الإعدادات",
+    "logout-btn": "تسجيل الخروج",
+    "logout-success-not": "تم تسجيل الخروج بنجاح",
+    "logout-error-not": "حدث خطأ اثناء عملية تسجيل الخروج"
+  },
+  "stats": {
+    "title": "الإحصائيات",
+    "views-per-day-chart-title": "المشاهدات حسب اليوم",
+    "articles-per-category-chart-title": "المقالات حسب التصنيف",
+    "pick-range-date-filter": "اختر نطاق التاريخ",
+    "no-data": "لا يوجد بيانات لعرضها"
+  },
+  "login": {
+    "title": "تسجيل الدخول",
+    "email-label": "البريد الإلكتروني",
+    "email-placeholder": "أدخل بريدك الإلكتروني",
+    "password-label": "كلمة المرور",
+    "password-placeholder": "أدخل كلمة المرور",
+    "image-label": "الصورة",
+    "image-placeholder": "اختر صورة شخصية",
+    "login-button": "تسجيل الدخول",
+    "error-invalid-credentials": "لم يتم العثور على حساب بهذه البيانات",
+    "login-success": "تم تسجيل الدخول بنجاح",
+    "signup-btn": "انشاء حساب",
+    "dont-have-account": "ليس لديك حساب؟"
+  },
+  "signup": {
+    "title": "تسجيل",
+    "signup-success": "تم تسجيل الدخول بنجاح!",
+    "first-name-label": "الاسم الأول",
+    "first-name-placeholder": "أدخل اسمك الأول",
+    "last-name-label": "اسم العائلة",
+    "last-name-placeholder": "أدخل اسم العائلة",
+    "email-label": "البريد الإلكتروني",
+    "email-placeholder": "أدخل بريدك الإلكتروني",
+    "image-label": "صورة شخصية",
+    "image-placeholder": "اختر صورة شخصية",
+    "password-label": "كلمة المرور",
+    "password-placeholder": "أدخل كلمة المرور",
+    "login-button": "تسجيل",
+    "login-btn": "تسجيل الدخول",
+    "already-have-account": "هل لديك حساب بالفعل؟"
+  },
+
+  "components": {
+    "FileInput": {
+      "upload-file": "تحميل"
+    }
+  },
+  "working-hours": {
+    "title": "أوقات العمل",
+    "day": "اليوم",
+    "work-time-title": "أوقات الدوام",
+    "pick-time": "اختر وقتاً",
+    "add": "إضافة",
+    "add-new-range-noti-success": "تمت إضافة فترة زمنية جديدة بنجاح",
+    "add-new-range-noti-error": "تم اكتشاف تعارض في النطاق الزمني",
+    "start-before-end-error": "يجب أن يكون وقت البدء قبل وقت الانتهاء",
+    "delelte-range-success-not": "تم حذف الفترة الزمنية بنجاح",
+    "fill-all-fields-error": "يرجى ملء جميع الحقول",
+    "start-time": "وقت البداية",
+    "end-time": "وقت النهاية",
+    "confirm-delete-message": "هل أنت متأكد, يمكنك التراجع عن عملية الحذف بالنقر على زر الإلغاء",
+    "cancel": "إلغاء",
+    "days": {
+      "sun": "الأحد",
+      "mon": "الاثنين",
+      "tue": "الثلاثاء",
+      "wed": "الأربعاء",
+      "thu": "الخميس",
+      "fri": "الجمعة",
+      "sat": "السبت"
+    },
+    "add-range": "اضافة مدة زمنيه"
+  },
+  "model": {
+    "cancel": "إلغاء",
+    "apply": "تطبيق",
+    "unsaved-message": "لديك تغييرات غير محفوظة. هل تريد تطبيقها أم إلغاءها؟",
+    "success-update-working-times": "تم تطبيق التعديلات بنجاح",
+    "success-copy-ranges": "تم نسخ الفترة زمنيه بنجاح مع تجاهل الأيام التي حدث فيها تعارض"
+  }
+}
