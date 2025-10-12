@@ -30,9 +30,11 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         />
       </Head>
       <div className="">
-        <NextIntlClientProvider>
-
-        {getLayout(<Component {...pageProps} />)}
+        <NextIntlClientProvider
+          messages={pageProps.messages}
+          locale={pageProps.locale}
+        >
+          {getLayout(<Component {...pageProps} />)}
         </NextIntlClientProvider>
         <Toaster position="top-right" />
       </div>

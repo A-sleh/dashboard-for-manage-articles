@@ -2,7 +2,7 @@
 
 import { ReactElement } from "react";
 import { Head } from "@/components/seo";
-import { getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
 
 import Header from "@/components/Header";
 import SubHeader from "@/features/setting/components/SubHeader";
@@ -11,9 +11,10 @@ import SystemSettings from "@/features/setting/components/SystemSettings";
 import UserAvatar from "@/features/setting/components/UserAvatar";
 import UserInfo from "@/features/setting/components/UserInfo";
 import DashBoradLayout from "@/components/layout/DashBoardLayout";
+import { GetServerSideProps } from "next";
 
-export default async function Settings() {
-  const t = await getTranslations("settings");
+export default  function Settings() {
+  const t = useTranslations("articles");
 
   return (
     <>
@@ -36,4 +37,18 @@ export default async function Settings() {
 
 Settings.getLayout = (page: ReactElement) => {
   return <DashBoradLayout>{page}</DashBoradLayout>;
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const cookie = require('cookie')
+  const cookieHeader = context.req.headers.cookie || "";
+  const parsedCookies = cookieHeader ? cookie.parse(cookieHeader) : {};
+  const locale = parsedCookies.locale || context.locale ||  "en";
+  
+  return {
+    props: {
+      messages: (await import(`../../../../messages/${locale}.json`)).default,
+      locale,
+    },
+  };
 };

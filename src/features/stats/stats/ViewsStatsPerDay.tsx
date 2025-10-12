@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 
-import useFilteredArticlesOnDate from "../hooks/useFilteredArticlesOnDate";
+import useFilteredArticlesOnDate from "../../auth/hooks/useFilteredArticlesOnDate";
 import { useNavSetting } from "@/stores/Nav-setting-store/Nav-setting-store";
 
 import Chart from "@/components/charts/Chart";

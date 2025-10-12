@@ -28,6 +28,7 @@ import AnimateFromToRight from "@/lib/Animation/AnimateFromLeftToRight";
 import Head from "next/head";
 import DashBoradLayout from "@/components/layout/DashBoardLayout";
 import { ReactElement } from "react";
+import { GetServerSideProps } from "next";
 
 const ICON_SIZE = 20;
 
@@ -154,3 +155,18 @@ export default function Article({ params }: { params: { id: number } }) {
 Article.getLayout = (page: ReactElement) => {
   return <DashBoradLayout>{page}</DashBoradLayout>;
 };
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const cookie = require('cookie')
+  const cookieHeader = context.req.headers.cookie || "";
+  const parsedCookies = cookieHeader ? cookie.parse(cookieHeader) : {};
+  const locale = parsedCookies.locale || context.locale ||  "en";
+  
+  return {
+    props: {
+      messages: (await import(`../../../../messages/${locale}.json`)).default,
+      locale,
+    },
+  };
+};
+

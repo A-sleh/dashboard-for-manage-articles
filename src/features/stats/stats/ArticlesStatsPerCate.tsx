@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 
-import useFilteredArticlesOnDate from "@/features/stats/hooks/useFilteredArticlesOnDate"; 
+import useFilteredArticlesOnDate from "@/features/auth/hooks/useFilteredArticlesOnDate"; 
 import Chart from "@/components/charts/Chart";
 import DatePicker from "@/components/ui/DatePicker";
 import AnimateFromToRight from '@/lib/Animation/AnimateFromLeftToRight'

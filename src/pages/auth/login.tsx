@@ -1,13 +1,14 @@
-import { ReactElement } from "react";
 
-import { getTranslations } from "next-intl/server";
+import { ReactElement } from "react";
+import { GetServerSideProps } from "next";
+import { useTranslations } from "next-intl";
 
 import { Head } from "@/components/seo";
-import LoginForm from "@/features/auth/components/LoginForm";
 import AuthLayout from "@/components/layout/AuthLayout";
+import LoginForm from "@/features/auth/components/LoginForm";
 
-export default async function Login() {
-  const t = await getTranslations("login");
+export default  function Login() {
+  const t =  useTranslations("login");
   return (
     <>
       <Head
@@ -21,4 +22,18 @@ export default async function Login() {
 
 Login.getLayout = (page: ReactElement) => {
   return <AuthLayout>{page}</AuthLayout>;
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const cookie = require('cookie')
+  const cookieHeader = context.req.headers.cookie || "";
+  const parsedCookies = cookieHeader ? cookie.parse(cookieHeader) : {};
+  const locale = parsedCookies.locale || context.locale ||  "en";
+  
+  return {
+    props: {
+      messages: (await import(`../../../messages/${locale}.json`)).default,
+      locale,
+    },
+  };
 };

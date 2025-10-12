@@ -12,7 +12,7 @@ export default function LanguageToggleButton({className = ''}: {
   const toggleLanguage = async () => {
     const newLang = lang === "ar" ? "en" : "ar";
     await changeLang(newLang);
-    router.refresh();
+    // router.refresh();
   };
 
   return (

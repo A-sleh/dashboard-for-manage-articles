@@ -16,6 +16,7 @@ export default function ProtectedRoute({
 
   
  useEffect(() => {
+    console.log(user)
     if (!user) {
       router.replace('/auth/login')
     }

@@ -1,5 +1,5 @@
 
-import { getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
 
 import ArticlesStatsPerCate from "@/features/stats/stats/ArticlesStatsPerCate";
 import ViewsStatsPerDay from "@/features/stats/stats/ViewsStatsPerDay";
@@ -7,10 +7,12 @@ import Header from "@/components/Header";
 import { ReactElement } from "react";
 import DashBoradLayout from "@/components/layout/DashBoardLayout";
 import { Head } from "@/components/seo";
+import { GetServerSideProps } from "next";
 
 
-export default async function Stats() {
-  const t = await getTranslations("stats");
+export default  function Stats() {
+  const t = useTranslations("articles");
+
   return (
     <>
       <Head
@@ -31,3 +33,18 @@ export default async function Stats() {
 Stats.getLayout = (page: ReactElement) => {
   return <DashBoradLayout>{page}</DashBoradLayout>;
 };
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const cookie = require('cookie')
+  const cookieHeader = context.req.headers.cookie || "";
+  const parsedCookies = cookieHeader ? cookie.parse(cookieHeader) : {};
+  const locale = parsedCookies.locale || context.locale ||  "en";
+  
+  return {
+    props: {
+      messages: (await import(`../../../../messages/${locale}.json`)).default,
+      locale,
+    },
+  };
+};
+

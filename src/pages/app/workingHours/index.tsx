@@ -1,15 +1,17 @@
 
 
 import { ReactElement } from "react";
-import { getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
+
 
 import { Head } from "@/components/seo";
 import Header from "@/components/Header";
 import WorkingHoursLayout from "@/features/working-hours/components/WorkingHoursLayout";
 import DashBoradLayout from "@/components/layout/DashBoardLayout";
+import { GetServerSideProps } from "next";
 
-export default async function WorkingHours() {
-  const t = await getTranslations("working-hours");
+export default function WorkingHours() {
+  const t = useTranslations("articles");
 
   return (
     <>
@@ -25,3 +27,18 @@ export default async function WorkingHours() {
 WorkingHours.getLayout = (page: ReactElement) => {
   return <DashBoradLayout>{page}</DashBoradLayout>;
 };
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const cookie = require('cookie')
+  const cookieHeader = context.req.headers.cookie || "";
+  const parsedCookies = cookieHeader ? cookie.parse(cookieHeader) : {};
+  const locale = parsedCookies.locale || context.locale ||  "en";
+  
+  return {
+    props: {
+      messages: (await import(`../../../../messages/${locale}.json`)).default,
+      locale,
+    },
+  };
+};
+
