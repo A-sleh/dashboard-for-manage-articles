@@ -31,13 +31,13 @@ export default function CKEdite({
   placeholder?: string;
 }) {
   const locale = useNavSetting((state) => state.lang);
-  const [isReady, setIsReady] = useState(false);
+  // const [isReady, setIsReady] = useState(false);
 
-  useEffect(() => {
-    setIsReady(true);
-  }, []);
+  // useEffect(() => {
+  //   setIsReady(true);
+  // }, []);
 
-  if (!isReady) return null;
+  // if (!isReady) return null;
 
   return (
     <div className="main-container ">

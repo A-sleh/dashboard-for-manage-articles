@@ -11,7 +11,7 @@ import { GetServerSideProps } from "next";
 
 
 export default  function Stats() {
-  const t = useTranslations("articles");
+  const t = useTranslations("stats");
 
   return (
     <>

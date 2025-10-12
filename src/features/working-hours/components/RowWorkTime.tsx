@@ -27,7 +27,7 @@ export default function RowWorkTime({
 
   return (
     <div
-      className={`px-4 py-1 border rounded-xs transition-all flex flex-col md:flex-row md:items-center gap-3 ${
+      className={`px-4 py-1 border rounded-sm transition-all flex flex-col md:flex-row md:items-center gap-3 ${
         workTime.isActive
           ? "border-primary bg-primary/5"
           : "border-gray-300  opacity-50"
