@@ -127,7 +127,7 @@ export default function ArticleForm({
               </label>
               <DatePicker
                 required
-                className="px-4 py-2 bg-white w-full text-secondary-dark dark:text-white dark:bg-transparent placeholder:text-sm dark:placeholder:text-white dark:border dark:border-white outline-hidden shadow-sm rounded-sm"
+                className="px-4 py-2 bg-white w-full text-secondary-dark dark:text-white dark:bg-transparent placeholder:text-sm dark:placeholder:text-white dark:border dark:border-white outline-hidden shadow-xs rounded-xs"
                 selected={form.scheduled}
                 locale={locale == "ar" ? arSA : enUS}
                 placeholderText={t("date-placeholder")}
@@ -202,7 +202,7 @@ export default function ArticleForm({
           <AnimateScale>
             <button
               type="submit"
-              className="w-full md:w-auto px-6 py-2 rounded-md bg-primary dark:bg-secondary-dark text-white hover:opacity-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all duration-300"
+              className="w-full md:w-auto px-6 py-2 rounded-md bg-primary dark:bg-secondary-dark text-white hover:opacity-50 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all duration-300"
             >
               {t("confirm")}
             </button>

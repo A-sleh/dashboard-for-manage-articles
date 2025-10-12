@@ -19,7 +19,7 @@ export default function ArticlesStatsPerCate() {
 
   return (
     <AnimateFromToRight className="flex-1 w-full h-full">
-      <div className="bg-white dark:bg-secondary-dark shadow p-4 dark:shadow-white rounded-2xl flex-1 w-full h-full">
+      <div className="bg-white dark:bg-secondary-dark shadow-sm p-4 dark:shadow-white rounded-2xl flex-1 w-full h-full">
         <h2 className="text-sm mb-2 font-semibold dark:text-white">
             {t("articles-per-category-chart-title")}
         </h2>

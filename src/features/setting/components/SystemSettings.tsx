@@ -25,7 +25,7 @@ const SystemSettings: FC = () => {
         >
           <LanguageToggleButton
             aria-label={t("language-toggle")}
-            className="bg-primary dark:bg-primary/80 text-white px-4 py-1.5 rounded-full shadow-sm hover:shadow-md hover:scale-105 transition-all min-w-[100px] text-center"
+            className="bg-primary dark:bg-primary/80 text-white px-4 py-1.5 rounded-full shadow-xs hover:shadow-md hover:scale-105 transition-all min-w-[100px] text-center"
           />
         </SettingLayout>
       </AnimateFromToRight>

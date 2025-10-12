@@ -39,7 +39,7 @@ export default function UserInfo() {
   return (
     <form
       onSubmit={onSubmit}
-      className="relative flex flex-col gap-4 flex-2 w-full p-5 bg-white dark:bg-primary-dark rounded-2xl shadow-sm hover:shadow-md transition-all dark:text-white border border-gray-100 dark:border-gray-700"
+      className="relative flex flex-col gap-4 flex-2 w-full p-5 bg-white dark:bg-primary-dark rounded-2xl shadow-xs hover:shadow-md transition-all dark:text-white border border-gray-100 dark:border-gray-700"
     >
       <AnimateFromToRight offsetValue={100}>
         {update ? (
@@ -96,7 +96,7 @@ export default function UserInfo() {
         {update && (
           <Button
             variant="secondary"
-            className="mt-2 bg-primary dark:bg-secondary-dark text-white  px-4 py-2 hover:text-white rounded-lg shadow hover:shadow-md hover:scale-[1.02] transition-all cursor-pointer"
+            className="mt-2 bg-primary dark:bg-secondary-dark text-white  px-4 py-2 hover:text-white rounded-lg shadow-sm hover:shadow-md hover:scale-[1.02] transition-all cursor-pointer"
           >
             {t("apply")}
           </Button>

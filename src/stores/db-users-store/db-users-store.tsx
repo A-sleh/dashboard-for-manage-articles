@@ -76,7 +76,7 @@ export const useDbUsers = create<DbUserStore>()(
         const existingUser = findUserByEmail(body.gemail, currentUsers);
 
         if(existingUser && existingUser.id != userId) {
-            throw new Error("Email is already used with a different password.")
+            throw new Error("Some thing went wrong")
         }
 
         set((state) => ({
@@ -95,7 +95,7 @@ export const useDbUsers = create<DbUserStore>()(
             throw new Error("This user already exists.");
           } else {
             // Email exists, but password does not match
-            throw new Error("Email is already used with a different password.");
+            throw new Error("Some thing went wrong")
           }
         }
 

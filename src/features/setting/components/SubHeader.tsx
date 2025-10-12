@@ -14,7 +14,7 @@ export default function SubHeader({
       <h1 className="relative text-md dark:text-white font-normal w-full">
         {title}
         {withUnderLine && (
-          <span className="w-full h-[1px] bg-primary dark:bg-primary-dark block rounded-sm mt-2"></span>
+          <span className="w-full h-px bg-primary dark:bg-primary-dark block rounded-xs mt-2"></span>
         )}
       </h1>
     </AnimateDownEffect>

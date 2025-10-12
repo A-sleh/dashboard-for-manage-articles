@@ -62,7 +62,7 @@ export default function Article({ article }: { article: IArticle }) {
               <span
                 className={`${
                   published ? "bg-green-400" : "bg-red-400"
-                } text-white px-1 py-0.5 rounded-sm text-[12px]`}
+                } text-white px-1 py-0.5 rounded-xs text-[12px]`}
               >
                 {published ? t("published") : t("not-published")}
               </span>

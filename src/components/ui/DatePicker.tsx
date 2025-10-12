@@ -25,13 +25,13 @@ export default function DatePicker({
         ref={dateRef}
         locale={locale == 'ar' ? arSA : enUS }
         selected={selectedDate}
-        className="outline-none w-[150px] cursor-pointer z-[100]"
+        className="outline-hidden w-[150px] cursor-pointer z-100"
         onChange={(date) => setSelectedDate(date || new Date())}
       />
       <MdDateRange
         onClick={() => dateRef.current?.onInputClick()}
         size={26}
-        className="p-1 rounded-sm  text-primary  hover:bg-white/50 transition-all dark:text-white "
+        className="p-1 rounded-xs  text-primary  hover:bg-white/50 transition-all dark:text-white "
       />
     </div>
   );

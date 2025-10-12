@@ -15,9 +15,9 @@ export default function FileInputSecondary({
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   return (
-    <div className="mb-1 flex flex-col w-full overflow-hidden shadow-sm flex-1">
+    <div className="mb-1 flex flex-col w-full overflow-hidden shadow-xs flex-1">
       <label className="text-primary dark:text-white mb-1 ">{label}</label>
-      <div onClick={() => inputRef.current?.click()} className=" bg-white text-secondary-dark  dark:text-white dark:bg-transparent placeholder:text-sm dark:placeholder:text-white dark:border dark:border-white outline-hidden shadow-sm rounded-sm flex justify-between overflow-hidden">
+      <div onClick={() => inputRef.current?.click()} className=" bg-white text-secondary-dark  dark:text-white dark:bg-transparent placeholder:text-sm dark:placeholder:text-white dark:border dark:border-white outline-hidden shadow-xs rounded-xs flex justify-between overflow-hidden">
         {value == "" ? (
           <p className="px-4 py-2 text-nowrap max-w-[20rem] overflow-hidden text-[#5252528e] dark:text-white">
             {placeHolder}

@@ -118,7 +118,7 @@ export default function UserAvatar() {
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="rounded-sm p-1 bg-white dark:bg-primary-dark text-sm outline-none focus:ring-2 focus:ring-primary"
+              className="rounded-xs p-1 bg-white dark:bg-primary-dark text-sm outline-hidden focus:ring-2 focus:ring-primary"
             />
             <button type="submit" title={t("save-name")}>
               <FaCheck size={16} className="dark:text-white text-green-500 hover:text-green-700 cursor-pointer" />

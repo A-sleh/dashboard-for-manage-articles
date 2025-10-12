@@ -101,7 +101,7 @@ export default function MultiSelectInput({
           );
         })}
 
-        <div className="flex-grow" /> {/* Spacer */}
+        <div className="grow" /> {/* Spacer */}
 
         {/* Dropdown icon */}
         <span className="text-gray-500 dark:text-white select-none pointer-events-none">

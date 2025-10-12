@@ -22,13 +22,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
   return (
     <div className={inter.className}>
-      <Head>
-        <title key="title">Nextjs News - App</title>
-        <meta
-          name="description"
-          content="The latest news cames from  news api"
-        />
-      </Head>
       <div className="">
         <NextIntlClientProvider
           messages={pageProps.messages}

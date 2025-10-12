@@ -37,7 +37,7 @@ export default function Navbar() {
             }  rounded-none border-white uppercase`}
           />
 
-          <Link href={"/settings"}>
+          <Link href={"/app/settings"}>
             {user?.image ? (
               <Avatar>
                 <AvatarImage src={user.image} alt="user-avatar" />

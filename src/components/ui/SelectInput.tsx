@@ -24,7 +24,7 @@ export default function SelectInput({
         value={value}
         {...props}
         {...register}
-        className="px-4 py-2 bg-white text-secondary-dark dark:text-white dark:bg-transparent placeholder:text-sm dark:placeholder:text-secondary-dark dark:border dark:border-white outline-hidden shadow-sm rounded-sm"
+        className="px-4 py-2 bg-white text-secondary-dark dark:text-white dark:bg-transparent placeholder:text-sm dark:placeholder:text-secondary-dark dark:border dark:border-white outline-hidden shadow-xs rounded-xs"
       >
         <option
           disabled

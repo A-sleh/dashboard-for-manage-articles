@@ -30,20 +30,20 @@ const ConfirmModal: FC<IConfirmeModal> = ({
       <Modal.Open opens={ModalKey}>{children}</Modal.Open>
       <Modal.Window
         name={ModalKey}
-        className="w-fit bg-white dark:bg-secondary-dark dark:text-white rounded-sm p-5"
+        className="w-fit bg-white dark:bg-secondary-dark dark:text-white rounded-xs p-5"
       >
         <AnimateScale className=" text-gray-600 w-full">
           <AiOutlineInfoCircle size={100} className="mx-auto dark:text-white" />
         </AnimateScale>
         <AnimateFromToRight>
-          <p className="text-center w-[25rem] font-unset text-gray-600 dark:text-white my-3 px-3">
+          <p className="text-center w-100 font-unset text-gray-600 dark:text-white my-3 px-3">
             {message}
           </p>
         </AnimateFromToRight>
         <div className="gap-2 flex justify-center ">
           <AnimateButton
             scale={0.9}
-            className="px-3 py-1 bg-primary dark:bg-primary-dark hover:bg-primary-hover text-white transition-all duration-100 cursor-pointer hover:opacity-75  rounded-sm "
+            className="px-3 py-1 bg-primary dark:bg-primary-dark hover:bg-primary-hover text-white transition-all duration-100 cursor-pointer hover:opacity-75  rounded-xs "
             onClick={() => handleApply()}
           >
             {t("apply")}
@@ -51,7 +51,7 @@ const ConfirmModal: FC<IConfirmeModal> = ({
           <Modal.Close>
             <AnimateButton
               scale={0.9}
-              className="px-3 py-1 bg-white  text-red-600 border-1 transition-all duration-100 border-red-600 hover:bg-red-600 hover:text-white cursor-pointer rounded-sm"
+              className="px-3 py-1 bg-white  text-red-600 border transition-all duration-100 border-red-600 hover:bg-red-600 hover:text-white cursor-pointer rounded-xs"
             >
               {t("cancel")}
             </AnimateButton>

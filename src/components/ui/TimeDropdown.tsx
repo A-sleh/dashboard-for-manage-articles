@@ -44,14 +44,14 @@ export default function TimeDropdown({
           e.stopPropagation();
           onToggle();
         }}
-        className={`cursor-pointer border rounded p-3 bg-white dark:bg-transparent ${className}`}
+        className={`cursor-pointer border rounded-sm p-3 bg-white dark:bg-transparent ${className}`}
       >
         {selected || "--"}
       </div>
       {isOpen && (
         <ul
           ref={ulRef}
-          className={`fixed left-[${ulRef.current?.clientLeft}px] top-[${ulRef.current?.clientTop}px] max-h-[100px] overflow-auto bg-white shadow rounded z-[50]`}
+          className={`fixed left-[${ulRef.current?.clientLeft}px] top-[${ulRef.current?.clientTop}px] max-h-[100px] overflow-auto bg-white shadow-sm rounded-sm z-50`}
           style={{ scrollbarWidth: "none" }}
         >
           {values.map((value) => (

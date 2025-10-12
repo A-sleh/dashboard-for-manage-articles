@@ -5,11 +5,11 @@ interface NotFoundMessageProps {
 export default function NotFoundMessage({ message }: NotFoundMessageProps) {
   return (
     <div className="flex items-center justify-center h-[50vh] w-full px-4">
-      <p className="flex items-center gap-2 bg-white dark:bg-primary-dark border border-red-400 dark:border-red-200 text-red-600 dark:text-red-200 rounded-md px-4 py-2 text-center text-lg shadow-sm max-w-md">
+      <p className="flex items-center gap-2 bg-white dark:bg-primary-dark border border-red-400 dark:border-red-200 text-red-600 dark:text-red-200 rounded-md px-4 py-2 text-center text-lg shadow-xs max-w-md">
         {/* Inline SVG warning icon */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 flex-shrink-0"
+          className="h-6 w-6 shrink-0"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
