@@ -11,7 +11,7 @@ import DashBoradLayout from "@/components/layout/DashBoardLayout";
 import { GetServerSideProps } from "next";
 
 export default function WorkingHours() {
-  const t = useTranslations("articles");
+  const t = useTranslations("working-hours");
 
   return (
     <>

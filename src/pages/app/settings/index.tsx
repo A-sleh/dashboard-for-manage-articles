@@ -14,7 +14,7 @@ import DashBoradLayout from "@/components/layout/DashBoardLayout";
 import { GetServerSideProps } from "next";
 
 export default  function Settings() {
-  const t = useTranslations("articles");
+  const t = useTranslations("settings");
 
   return (
     <>
