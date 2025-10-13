@@ -52,7 +52,7 @@ export default function Sidebar() {
 
   // detect md breakpoint (Tailwind default: 768px)
   const [isMd, setIsMd] = useState(
-    typeof window !== "undefined" ? window.innerWidth >= 768 : true
+    typeof window !== "undefined" ? window.innerWidth >= 768 : false
   );
 
   useEffect(() => {
@@ -62,6 +62,7 @@ export default function Sidebar() {
 
     // set initial value
     onChange(mq);
+
     // add listener (support both addEventListener and deprecated addListener)
     if (mq.addEventListener) mq.addEventListener("change", onChange);
     else mq.addListener(onChange);
@@ -129,6 +130,7 @@ export default function Sidebar() {
                 key={href}
                 href={href}
                 title={t(labelKey)}
+                isMdScreen={isMd}
                 Icon={<Icon size={22} />}
               >
                 {t(labelKey)}

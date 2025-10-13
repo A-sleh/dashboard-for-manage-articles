@@ -10,6 +10,7 @@ type NavLinkProps = {
   children: React.ReactNode;
   Icon?: React.ReactElement;
   title: string;
+  isMdScreen?: boolean;
 };
 
 export default function NavLink({
@@ -17,10 +18,11 @@ export default function NavLink({
   activeClassName = "bg-white text-primary dark:bg-white/90 dark:text-black",
   children,
   title,
+  isMdScreen,
   Icon,
   ...props
 }: NavLinkProps) {
-  const isOpen = useNavSetting((state) => state.openSidebar);
+  const { openSidebar , toggleSidebarView } = useNavSetting((state) => state);
   const pathname = usePathname();
 
   // use startsWith if you want to highlight parent routes too
@@ -28,6 +30,7 @@ export default function NavLink({
 
   return (
     <Link
+      onClick={() => !isMdScreen && toggleSidebarView()}
       title={title}
       href={href}
       className={`px-3 py-2 rounded-md font-normal flex items-center gap-2 transition-all 
@@ -36,7 +39,7 @@ export default function NavLink({
       {...props}
     >
       {Icon}
-      <p className={`${isOpen ? "md:block" : "hidden"}`}>{children}</p>
+      <p className={`${openSidebar ? "md:block" : "hidden"}`}>{children}</p>
     </Link>
   );
 }

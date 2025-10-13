@@ -22,7 +22,7 @@ export type NavSettingsStore = NavSettings & NavSettingsActions;
 const initialNavSettings: NavSettings = {
   isDarkMode: false,
   lang: "en",
-  openSidebar: true,
+  openSidebar: false,
 };
 
 // ========== helpers ========
