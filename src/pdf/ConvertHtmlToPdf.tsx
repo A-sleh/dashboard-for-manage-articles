@@ -136,7 +136,7 @@ function renderNode(node: any, index: number, listContext: IListContext = {} as 
         );
       }
       case "li": {
-        const marker = listContext.type === "ol" ? `${listContext.count}.` : "\u2022";
+        const marker = listContext.type === "ol" ? `${listContext.count}` : "\u2022";
         return (
           <View
             key={index}

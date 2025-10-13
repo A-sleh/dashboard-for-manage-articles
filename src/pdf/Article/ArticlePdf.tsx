@@ -46,13 +46,12 @@ const styles = StyleSheet.create({
   },
   container: {
     display: "flex",
-    flexDirection: "column",
     gap: 10,
     flex: 1,
   },
   image: {
-    width: "80%",
-    height: 400,
+    width: "100%",
+    height: 250,
     backgroundColor: "#1C6EA4",
     alignSelf: "center",
   },
@@ -60,15 +59,17 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row-reverse",
     justifyContent: "center",
-    gap: 10,
+    flexWrap: "wrap",
+    marginTop: 2,
+    gap: 3,
   },
   tage: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
+    paddingHorizontal: 5,
+    paddingVertical: 2,
     backgroundColor: "#1C6EA4",
-    fontSize: 12,
+    fontSize: 6,
     color: "#FFFFFF",
-    borderRadius: 10,
+    borderRadius: 2,
   },
   title: {
     fontSize: 18,
@@ -106,8 +107,6 @@ export const ArticlePdf = ({
   article: IArticle;
   locale: "ar" | "en";
 }) => {
-
-  console.log(locale)
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -118,7 +117,14 @@ export const ArticlePdf = ({
           ]}
         >
           <View style={{ textAlign: locale == "ar" ? "right" : "left" }}>
-            <Text style={[styles.title,{textAlign: locale == 'ar' ? 'right' : 'left'}]}>{article.title}</Text>
+            <Text
+              style={[
+                styles.title,
+                { textAlign: locale == "ar" ? "right" : "left" },
+              ]}
+            >
+              {article.title}
+            </Text>
             <View
               style={[
                 styles.categoryContainer,
@@ -133,20 +139,34 @@ export const ArticlePdf = ({
           </Text>
         </View>
 
-        <View style={[styles.container]}>
-          {article.cover && (
-            <Image src={article.cover.trim()} style={styles.image} />
-          )}
-          <View style={styles.tages}>
-            {article?.tags?.map((tag, i) => (
-              <Text key={i} style={styles.tage}>
-                {tag}
-              </Text>
-            ))}
+        <View
+          style={[
+            styles.container,
+            {
+              flexDirection: !article.cover
+                ? "column"
+                : locale == "ar"
+                ? "row-reverse"
+                : "row",
+            },
+          ]}
+        >
+          <View style={{flex: '1'}}>
+            {article.cover && (
+              <Image src={article.cover.trim()} style={styles.image} />
+            )}
+            <View style={styles.tages}>
+              {article?.tags?.map((tag, i) => (
+                <Text key={i} style={styles.tage}>
+                  {tag}
+                </Text>
+              ))}
+            </View>
           </View>
           <View
             style={{
               fontFamily: "Amiri",
+              flex: '2',
               width: "100%",
               textAlign: locale == "ar" ? "right" : "left",
             }}
