@@ -27,8 +27,8 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     <div className={inter.className}>
       <div className={`${isDarkMode ? 'dark' : ""}`} dir={lang == 'ar' ? 'rtl' : 'ltr'}>
         <NextIntlClientProvider
-          messages={pageProps.messages}
-          locale={pageProps.locale}
+          messages={pageProps?.messages || {}}
+          locale={pageProps?.locale || 'en'}
         >
           {getLayout(<Component {...pageProps} />)}
         </NextIntlClientProvider>
