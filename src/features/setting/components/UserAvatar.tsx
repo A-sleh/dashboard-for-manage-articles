@@ -1,7 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState, useEffect, ChangeEvent, FormEvent, KeyboardEvent } from "react";
+import {
+  useRef,
+  useState,
+  useEffect,
+  ChangeEvent,
+  FormEvent,
+  KeyboardEvent,
+} from "react";
 
 import { useAuth } from "@/stores/Auth-store/Auth-srore";
 
@@ -15,10 +22,12 @@ import AnimateScale from "@/lib/Animation/AnimateScale";
 import { errorToast, successToast } from "@/components/custom/toast";
 import { getFileUrl } from "@/utils/helper";
 import { useTranslations } from "next-intl";
+import { cn } from "@/lib/utils";
 
 export default function UserAvatar() {
   const t = useTranslations("settings.userAvatar");
 
+  const [updateImageFromMobile, setUpdateImageFromMobile] = useState(false);
   const imageRef = useRef<HTMLInputElement | null>(null);
   const nameRef = useRef<HTMLInputElement | null>(null);
 
@@ -41,6 +50,7 @@ export default function UserAvatar() {
 
       if (url) {
         changeImage(url);
+        setUpdateImageFromMobile(false)
         successToast(t("update-image-success"));
       } else {
         throw new Error(t("error-setting-user-image"));
@@ -53,8 +63,8 @@ export default function UserAvatar() {
   const handleSaveName = (e?: FormEvent) => {
     if (e) e.preventDefault();
     if (!userName.trim()) {
-      errorToast(t('error-user-name-empty'))
-      return
+      errorToast(t("error-user-name-empty"));
+      return;
     }
 
     updateUserName(userName.trim());
@@ -84,7 +94,10 @@ export default function UserAvatar() {
   return (
     <AnimateScale className="flex flex-col gap-3 flex-[0.5] items-center text-center dark:text-white relative transition-all">
       {/* Avatar with hover controls */}
-      <div className="relative w-32 h-32 rounded-full overflow-hidden group">
+      <div
+        onClick={() => setUpdateImageFromMobile(true)}
+        className="relative w-32 h-32 rounded-full overflow-hidden group"
+      >
         <Image
           src={user?.image || "/default-avatar.png"}
           width={128}
@@ -92,7 +105,12 @@ export default function UserAvatar() {
           alt={t("user-image-label")}
           className="w-full h-full bg-black dark:bg-primary-dark object-cover"
         />
-        <div className="absolute inset-0 bg-black/40 opacity-0 transition-opacity group-focus:opacity-100 group-hover:opacity-100 flex items-center justify-center gap-3">
+        <div
+          className={cn(
+            "absolute inset-0 bg-black/40 opacity-0 transition-opacity group-focus:opacity-100 group-hover:opacity-100 flex items-center justify-center gap-3",
+            updateImageFromMobile ? "opacity-100" : "opacity-0"
+          )}
+        >
           <input
             type="file"
             hidden
@@ -100,11 +118,20 @@ export default function UserAvatar() {
             onChange={handleChangeImage}
             accept="image/*"
           />
-          <button onClick={() => imageRef.current?.click()} title={t("upload-image")}>
-            <FaFileUpload size={22} className="text-white hover:text-primary transition cursor-pointer" />
+          <button
+            onClick={() => imageRef.current?.click()}
+            title={t("upload-image")}
+          >
+            <FaFileUpload
+              size={22}
+              className="text-white hover:text-primary transition cursor-pointer"
+            />
           </button>
           <button onClick={handleRemoveImage} title={t("remove-image")}>
-            <MdOutlineDeleteOutline size={22} className="text-white hover:text-red-600 transition cursor-pointer" />
+            <MdOutlineDeleteOutline
+              size={22}
+              className="text-white hover:text-red-600 transition cursor-pointer"
+            />
           </button>
         </div>
       </div>
@@ -112,7 +139,10 @@ export default function UserAvatar() {
       {/* Editable Username */}
       <div className="flex items-center gap-2 transition-all">
         {isEditing ? (
-          <form onSubmit={handleSaveName} className="flex items-center gap-2 dark:bg-">
+          <form
+            onSubmit={handleSaveName}
+            className="flex items-center gap-2 dark:bg-"
+          >
             <input
               ref={nameRef}
               value={userName}
@@ -121,17 +151,30 @@ export default function UserAvatar() {
               className="rounded-xs p-1 bg-white dark:bg-primary-dark text-sm outline-hidden focus:ring-2 focus:ring-primary"
             />
             <button type="submit" title={t("save-name")}>
-              <FaCheck size={16} className="dark:text-white text-green-500 hover:text-green-700 cursor-pointer" />
+              <FaCheck
+                size={16}
+                className="dark:text-white text-green-500 hover:text-green-700 cursor-pointer"
+              />
             </button>
-            <button type="button" onClick={handleCancelEdit} title={t("cancel-edit")}>
-              <IoIosClose size={25} className="dark:text-white text-red-500 hover:text-red-700 cursor-pointer" />
+            <button
+              type="button"
+              onClick={handleCancelEdit}
+              title={t("cancel-edit")}
+            >
+              <IoIosClose
+                size={25}
+                className="dark:text-white text-red-500 hover:text-red-700 cursor-pointer"
+              />
             </button>
           </form>
         ) : (
           <>
             <span className="font-medium text-lg">{userName}</span>
-            <button onClick={() => setIsEditing(true)} >
-              <FaPenToSquare size={16} className="text-primary hover:text-primary/80 cursor-pointer" />
+            <button onClick={() => setIsEditing(true)}>
+              <FaPenToSquare
+                size={16}
+                className="text-primary hover:text-primary/80 cursor-pointer"
+              />
             </button>
           </>
         )}

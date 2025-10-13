@@ -14,7 +14,7 @@ import Link from "next/link";
 export default function Navbar() {
   const user = useAuth((state) => state.user);
   const { toggleSidebarView, lang } = useNavSetting((state) => state);
-
+  
   return (
     <nav className="w-full bg-secondary dark:bg-primary-dark shadow-md">
       <div className="flex items-center justify-between px-4 py-2">
@@ -37,17 +37,11 @@ export default function Navbar() {
             }  rounded-none border-white uppercase`}
           />
 
-          <Link href={"/app/settings"}>
-            {user?.image ? (
-              <Avatar>
-                <AvatarImage src={user.image} alt="user-avatar" />
-                <AvatarFallback>{user?.userName ?? "U"}</AvatarFallback>
-              </Avatar>
-            ) : (
-              <Avatar>
-                <AvatarFallback>U</AvatarFallback>
-              </Avatar>
-            )}
+          <Link href={"/app/settings"}>            
+            <Avatar>
+              <AvatarImage src={user?.image || ''} alt="user-avatar" />
+              <AvatarFallback>{user?.userName ?? "U"}</AvatarFallback>
+            </Avatar>
           </Link>
         </div>
       </div>

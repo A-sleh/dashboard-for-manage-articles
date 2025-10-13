@@ -24,13 +24,13 @@ export default function ArticlesStatsPerCate() {
             {t("articles-per-category-chart-title")}
         </h2>
         <div className="flex flex-col md:flex-row gap-2 items-center mb-4">
-          <div className="flex-1">
+          <div className="flex-1 w-full">
             <DatePicker
               selectedDate={startDate}
               setSelectedDate={setStartDate}
             />
           </div>
-          <div className="flex-1">
+          <div className="flex-1 w-full">
             <DatePicker selectedDate={endDate} setSelectedDate={setEndDate} />
           </div>
         </div>
