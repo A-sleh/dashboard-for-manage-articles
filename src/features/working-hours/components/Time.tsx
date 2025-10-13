@@ -40,7 +40,7 @@ export default function Time({
 
   return (
     <AnimateScale
-      className={`flex items-center gap-0.5 rounded-xs bg-white dark:bg-primary-dark p-1 transition-all `}
+      className={`flex items-center gap-0.5 rounded-sm bg-white dark:bg-primary-dark p-1 transition-all `}
     >
       {/* Time Display / Inputs */}
       <div className="flex items-center text-sm text-gray-800 dark:text-gray-200 ">

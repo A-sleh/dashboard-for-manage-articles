@@ -1,10 +1,9 @@
-"use client";
 
 import Link from "next/link";
 import Image from "next/image";
 
 import parse from "html-react-parser";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 
 import { IoChevronBackCircleOutline } from "react-icons/io5";
 import { useArticles } from "@/stores/Article-store/Articles-store";
@@ -15,6 +14,7 @@ import { FaDownload, FaPencilAlt } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 
 import { formatDate } from "@/utils/helper";
+import Loader  from "@/components/Model/Loader" 
 import { successToast } from "@/components/custom/toast";
 import DownLoadArticlePdf from "@/pdf/Article/DownLoadArticlePdf";
 import ArticleForm from "@/features/articles/components/ArticleForm";
@@ -29,19 +29,25 @@ import Head from "next/head";
 import DashBoradLayout from "@/components/layout/DashBoardLayout";
 import { ReactElement } from "react";
 import { GetServerSideProps } from "next";
+import useLoadinPage from "@/hooks/useLoadingPage";
 
 const ICON_SIZE = 20;
 
-export default function Article({ params }: { params: { id: number } }) {
+export default function Article() {
   const router = useRouter();
+  const isLoading = useLoadinPage()
   const t = useTranslations("articles.article");
-
+  const id = Number(router.query?.articleId) 
+  
   const { getArticleBy, deleteArticle } = useArticles((state) => state);
   const locale = useNavSetting((state) => state.lang);
-  const article = getArticleBy(params.id);
+  const article = getArticleBy(id);
+  
+  if(isLoading) {
+    return <Loader />
+  }
 
   if (!article) return <NotFoundMessage message={t("not-found-message")} />;
-
   const { cover, title, published, scheduled, category, tags, richText } =
     article;
 
@@ -59,7 +65,7 @@ export default function Article({ params }: { params: { id: number } }) {
     <section className="p-4">
       <AnimateDownEffect className="flex justify-between p-2 bg-primary dark:bg-primary-dark rounded-md mb-2 text-white">
         <span>{formatDate(new Date(scheduled || ""), locale)}</span>
-        <Link href="/articles" aria-label={t("back-to-articles")}>
+        <Link href="/app/articles" aria-label={t("back-to-articles")}>
           <IoChevronBackCircleOutline size={25} />
         </Link>
       </AnimateDownEffect>
@@ -78,7 +84,7 @@ export default function Article({ params }: { params: { id: number } }) {
           <div className="actions flex gap-2">
             <ConfirmModal
               ModalKey="delete-range"
-              handleApply={() => handleDelete(params.id)}
+              handleApply={() => handleDelete(id)}
               message={t("confirm-delete-message")}
             >
               <AiOutlineDelete

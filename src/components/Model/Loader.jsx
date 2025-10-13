@@ -1,4 +1,4 @@
-import "./modal.css";
+
 
 export default function Loader() {
   return (

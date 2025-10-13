@@ -1,8 +1,9 @@
 import "@/styles/globals.css";
+import "@/styles/modal.css"
 
 import { NextPage } from "next";
 import { ReactElement, ReactNode } from "react";
-import { Inter } from "next/font/google";
+import { Readex_Pro } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import { NextIntlClientProvider } from "next-intl";
 import type { AppProps } from "next/app";
@@ -16,11 +17,12 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Readex_Pro({ subsets: ["arabic"] });
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
-  const {isDarkMode,lang} = useNavSetting(state => state)
+  const {isDarkMode,lang} = useNavSetting(state => state);
+  
   return (
     <div className={inter.className}>
       <div className={`${isDarkMode ? 'dark' : ""}`} dir={lang == 'ar' ? 'rtl' : 'ltr'}>

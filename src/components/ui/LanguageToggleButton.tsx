@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import { useNavSetting } from "@/stores/Nav-setting-store/Nav-setting-store";
 
 export default function LanguageToggleButton({className = ''}: {
@@ -12,7 +12,7 @@ export default function LanguageToggleButton({className = ''}: {
   const toggleLanguage = async () => {
     const newLang = lang === "ar" ? "en" : "ar";
     await changeLang(newLang);
-    // router.refresh();
+    router.reload()
   };
 
   return (

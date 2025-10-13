@@ -52,7 +52,7 @@ export default function Article({ article }: { article: IArticle }) {
         dir={lang == "ar" ? "rtl" : "ltr"}
       >
         <Link
-          href={`/articles/${id}`}
+          href={`/app/articles/${id}`}
           title={t("back-to-articles")}
           className="flex flex-col md:flex-row justify-between flex-1"
         >

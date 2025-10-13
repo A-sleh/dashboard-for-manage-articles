@@ -106,6 +106,8 @@ export const ArticlePdf = ({
   article: IArticle;
   locale: "ar" | "en";
 }) => {
+
+  console.log(locale)
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -116,7 +118,7 @@ export const ArticlePdf = ({
           ]}
         >
           <View style={{ textAlign: locale == "ar" ? "right" : "left" }}>
-            <Text style={styles.title}>{article.title}</Text>
+            <Text style={[styles.title,{textAlign: locale == 'ar' ? 'right' : 'left'}]}>{article.title}</Text>
             <View
               style={[
                 styles.categoryContainer,

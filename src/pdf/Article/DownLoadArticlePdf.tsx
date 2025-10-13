@@ -16,7 +16,6 @@ const PDFDownloadLink = dynamic(
   }
 );
 
-
 export default function DownLoadArticlePdf({
   article,
   children,
