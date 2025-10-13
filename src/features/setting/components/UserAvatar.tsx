@@ -92,7 +92,7 @@ export default function UserAvatar() {
           alt={t("user-image-label")}
           className="w-full h-full bg-black dark:bg-primary-dark object-cover"
         />
-        <div className="absolute inset-0 bg-black/40 opacity-0 transition-opacity group-hover:opacity-100 flex items-center justify-center gap-3">
+        <div className="absolute inset-0 bg-black/40 opacity-0 transition-opacity group-focus:opacity-100 group-hover:opacity-100 flex items-center justify-center gap-3">
           <input
             type="file"
             hidden

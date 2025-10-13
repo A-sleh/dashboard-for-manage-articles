@@ -31,7 +31,7 @@ export default function ViewsStatsPerDay() {
         <h2 className="text-sm mb-2 font-semibold dark:text-white">
           {t("views-per-day-chart-title")}
         </h2>
-        <div className="flex gap-2 items-center mb-4">
+        <div className="flex flex-col md:flex-row gap-2 items-center mb-4">
           <div className="flex-1">
             <DatePicker
               selectedDate={startDate}

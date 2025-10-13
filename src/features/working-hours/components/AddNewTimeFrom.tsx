@@ -93,7 +93,7 @@ export default function AddNewTimeForm({
       <Model.Open opens="new-range-time">{children}</Model.Open>
 
       <Model.Window name="new-range-time">
-        <div className="flex flex-col items-center rounded-2xl bg-white dark:bg-primary-dark text-primary dark:text-gray-100 w-full md:min-w-[28vw] p-6 shadow-lg">
+        <div className="flex flex-col items-center rounded-2xl bg-white dark:bg-primary-dark text-primary dark:text-gray-100 w-[90%] md:min-w-[28vw] p-6 shadow-lg">
           <Model.Close>
             <button className="flex justify-end w-full p-1 cursor-pointer ">
               <MdClose size={24} />
