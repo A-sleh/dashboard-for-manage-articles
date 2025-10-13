@@ -44,7 +44,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           </NextIntlClientProvider>
         )}
       </div>
-      <Toaster position="top-right" />
+      <Toaster position="top-right" containerStyle={{textAlign: lang == "ar" ? "right" : "left" }} />
     </div>
   );
 }

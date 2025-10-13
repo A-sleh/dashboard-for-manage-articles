@@ -84,7 +84,7 @@ function Window({ children, name, className = "" }: WindowProps) {
         onClick={(e: MouseEvent<HTMLDivElement, MouseEvent>) => {
           e.stopPropagation();
         }}
-        className={`fixed top-1/2 left-1/2 z-50 translate-x-[-50%] translate-y-[-50%] p-2 hide-scrollbar  overflow-auto w-[90%] md:w-fit ${className}`}
+        className={`fixed top-1/2 left-1/2 z-50 translate-x-[-50%] translate-y-[-50%] p-2 hide-scrollbar  overflow-auto w-[95%] md:w-fit ${className}`}
       >
         {children}
       </AnimateScale>

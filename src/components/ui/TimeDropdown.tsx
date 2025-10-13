@@ -44,7 +44,7 @@ export default function TimeDropdown({
           e.stopPropagation();
           onToggle();
         }}
-        className={`cursor-pointer border rounded-sm p-3 bg-white dark:bg-transparent ${className}`}
+        className={`cursor-pointer border rounded-sm p-3 bg-white dark:bg-transparent text-nowrap ${className}`}
       >
         {selected || "--"}
       </div>
