@@ -6,10 +6,10 @@ export default function NotFounde() {
       <div className="p-6 rounded-md text-center bg-primary dark:bg-secondary-dark w-fit font-bold shadow-2xs">
         <div className="text-white text-3xl mb-5">Route page note found</div>
         <Link
-          href="/login"
+          href="/app/articles"
           className="px-2 py-1 bg-white text-primary hover:shadow-md transition-all rounded-md dark:text-primary-dark"
         >
-          Go to login page
+          Refresh page
         </Link>
       </div>
     </section>

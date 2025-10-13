@@ -2,9 +2,9 @@
 
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
+import dynamic from "next/dynamic";
 
 import DatePicker from "react-datepicker";
-import CKEdite from "@/components/ui/CKEdite";
 import MainInput from "@/components/ui/MainInput";
 import ToggleButton from "@/components/ui/ToggleButton";
 import Model from "@/components/Model/Model";
@@ -20,6 +20,8 @@ import { delayChangeState, getFileUrl } from "@/utils/helper";
 import { MdClose } from "react-icons/md";
 import AnimateFromToRight from "@/lib/Animation/AnimateFromLeftToRight";
 import AnimateScale from "@/lib/Animation/AnimateScale";
+
+const CKEdite = dynamic(() => import("@/components/ui/CKEdite"),{ssr: false})
 
 const Categories = {
   en: ["Article", "Post", "Short post"],
