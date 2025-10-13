@@ -33,7 +33,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         className={`${isDarkMode ? "dark" : ""}`}
         dir={lang == "ar" ? "rtl" : "ltr"}
       >
-        {hydration ? (
+        {!hydration ? (
           <Loading />
         ) : (
           <NextIntlClientProvider
