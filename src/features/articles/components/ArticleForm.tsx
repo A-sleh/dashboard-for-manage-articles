@@ -46,7 +46,7 @@ export default function ArticleForm({
   method,
   children,
 }: {
-  initialForm: any;
+  initialForm?: any;
   method: "POST" | "PUT";
   children: React.ReactElement;
 }) {
