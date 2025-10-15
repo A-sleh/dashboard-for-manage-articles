@@ -93,6 +93,9 @@
     "email-label": "البريد الإلكتروني",
     "email-placeholder": "أدخل بريدك الإلكتروني",
     "password-label": "كلمة المرور",
+    "password-req-password-msg": "أدخل كلمة مرور البريد الإلكتروني",
+    "email-invalid-email-msg": "البريد الإلكتروني غير صالح",
+    "email-req-email-msg": "أدخل بريدك الإلكتروني",
     "password-placeholder": "أدخل كلمة المرور",
     "image-label": "الصورة",
     "image-placeholder": "اختر صورة شخصية",
@@ -117,7 +120,12 @@
     "password-placeholder": "أدخل كلمة المرور",
     "login-button": "تسجيل",
     "login-btn": "تسجيل الدخول",
-    "already-have-account": "هل لديك حساب بالفعل؟"
+    "already-have-account": "هل لديك حساب بالفعل؟",
+    "first-name-required-msg": "الاسم الأول مطلوب",
+    "last-name-required-msg": "اسم العائلة مطلوب",
+    "email-req-email-msg": "أدخل بريدك الإلكتروني",
+    "email-invalid-email-msg": "البريد الإلكتروني غير صالح",
+    "password-req-password-msg": "أدخل كلمة مرور البريد الإلكتروني"
   },
 
   "components": {

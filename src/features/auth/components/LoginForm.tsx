@@ -1,34 +1,47 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { SubmitHandler, useForm, Controller } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 
 import { errorToast, successToast } from "@/components/custom/toast";
 import AnimateScale from "@/lib/Animation/AnimateScale";
-import { Input } from "@/components/ui/Input";
+import { FormInput } from "@/components/ui/FormInput";
 
-import ChangeLink from "./ChangeLink"; 
-import { ICredential, useAuth } from "@/stores/Auth-store/Auth-srore";
+import ChangeLink from "./ChangeLink";
+import { useAuth } from "@/stores/Auth-store/Auth-srore";
 import AnimateFromToRight from "@/lib/Animation/AnimateFromLeftToRight";
-
-const intialValue: ICredential = {
-  gemail: "",
-  password: "",
-};
+import SubmitBtn from "@/components/ui/SubmitBtn";
 
 export default function LoginForm() {
   const t = useTranslations("login");
   const router = useRouter();
 
+  const loginSchema = yup.object({
+    gemail: yup
+      .string()
+      .required(t("email-req-email-msg"))
+      .email(t("email-invalid-email-msg")),
+    password: yup.string().required(t("password-req-password-msg")),
+  });
+
+  type IFormType = yup.InferType<typeof loginSchema>;
+
   const login = useAuth((state) => state.login);
-  const [user, setUser] = useState<ICredential>(intialValue);
+  const { handleSubmit, control, formState } = useForm<IFormType>({
+    defaultValues: {
+      gemail: "",
+      password: "",
+    },
+    resolver: yupResolver(loginSchema),
+  });
+  const { errors, isSubmitting } = formState;
 
-  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const onSubmit: SubmitHandler<IFormType> = async (data) => {
     try {
-      await login(user);
+      await login(data);
       router.replace("/app/articles");
       successToast(t("login-success"));
     } catch (err) {
@@ -39,34 +52,42 @@ export default function LoginForm() {
   return (
     <AnimateScale>
       <form
-        onSubmit={onSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         className="p-4 rounded-md bg-white shadow-md w-full space-y-2"
       >
         <AnimateFromToRight>
-          <Input
-            label={t("email-label")}
-            placeHolder={t("email-placeholder")}
-            required={true}
-            type="email"
-            value={user.gemail}
-            onChange={(e) => setUser({ ...user, gemail: e.target.value })}
+          <Controller
+            name="gemail"
+            control={control}
+            render={({ field }) => (
+              <FormInput
+                label={t("email-label")}
+                placeHolder={t("email-placeholder")}
+                error={errors?.gemail?.message}
+                type="email"
+                {...field}
+              />
+            )}
           />
         </AnimateFromToRight>
         <AnimateFromToRight>
-          <Input
-            label={t("password-label")}
-            placeHolder={t("password-placeholder")}
-            required={true}
-            type="password"
-            value={user.password}
-            onChange={(e) => setUser({ ...user, password: e.target.value })}
+          <Controller
+            name="password"
+            control={control}
+            render={({ field }) => (
+              <FormInput
+                label={t("password-label")}
+                placeHolder={t("password-placeholder")}
+                error={errors?.password?.message}
+                type="password"
+                {...field}
+              />
+            )}
           />
         </AnimateFromToRight>
 
         <AnimateScale>
-          <button className="bg-primary dark:bg-secondary-dark rounded-md text-white px-2 py-1 my-2  cursor-pointer w-full transition-all hover:text-black hover:bg-white hover:outline-primary  hover:outline-1">
-            {t("login-button")}
-          </button>
+          <SubmitBtn lable={t("login-button")} isLoading={isSubmitting} />
         </AnimateScale>
         <ChangeLink
           link="/auth/signup"

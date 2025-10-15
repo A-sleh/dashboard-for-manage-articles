@@ -95,6 +95,9 @@
     "title": "Login",
     "email-label": "Email",
     "email-placeholder": "Enter your email",
+    "password-req-password-msg": "Enter email password",
+    "email-invalid-email-msg": "Email is not valid",
+    "email-req-email-msg": "Enter your email",
     "password-label": "Password",
     "password-placeholder": "Enter your password",
     "image-label": "Image",
@@ -120,7 +123,12 @@
     "image-placeholder": "Select avatar image",
     "login-button": "Sign Up",
     "login-btn": "Login",
-    "already-have-account": "Already have an account?"
+    "already-have-account": "Already have an account?",
+    "first-name-required-msg": "First name is required",
+    "last-name-required-msg": "Last name is required",
+    "email-req-email-msg": "Enter your email",
+    "email-invalid-email-msg": "Email is not valid",
+    "password-req-password-msg": "Enter your email password"
   },
   "components": {
     "FileInput": {
