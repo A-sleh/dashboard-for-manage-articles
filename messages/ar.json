@@ -36,7 +36,11 @@
       "success-add": "تم إضافة المقال بنجاح!",
       "success-update": "تم تحديث المقال بنجاح!",
       "ckeditor-placeholder": "اكتب وصفا للمقال",
-      "empty-cover-image": "يجب تحديد صورة للمنشور"
+      "empty-cover-image": "يجب تحديد صورة للمنشور",
+      "title-required-msg": "العنوان مطلوب",
+      "category-required-msg": "الفئة مطلوبة",
+      "tags-required-msg": "يرجى اختيار وسم واحد على الأقل",
+      "date-required-msg": "التاريخ مطلوب"
     }
   },
   "settings": {

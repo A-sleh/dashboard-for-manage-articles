@@ -13,6 +13,7 @@ export type inputType = {
   readOnly?: boolean;
   className?: string;
   labelStyle?: string;
+  error?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 

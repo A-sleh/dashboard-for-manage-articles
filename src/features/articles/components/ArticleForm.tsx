@@ -1,6 +1,9 @@
 "use client";
 
-import { ChangeEvent, FormEvent, useRef, useState } from "react";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { SubmitHandler, useForm, Controller } from "react-hook-form";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 
@@ -20,8 +23,11 @@ import { delayChangeState, getFileUrl } from "@/utils/helper";
 import { MdClose } from "react-icons/md";
 import AnimateFromToRight from "@/lib/Animation/AnimateFromLeftToRight";
 import AnimateScale from "@/lib/Animation/AnimateScale";
+import SubmitBtn from "@/components/ui/SubmitBtn";
 
-const CKEdite = dynamic(() => import("@/components/ui/CKEdite"),{ssr: false})
+const CKEdite = dynamic(() => import("@/components/ui/CKEdite"), {
+  ssr: false,
+});
 
 const Categories = {
   en: ["Article", "Post", "Short post"],
@@ -31,19 +37,6 @@ const Categories = {
 const tags = {
   ar: ["اخبار", "شخصي", "رياضة"],
   en: ["News", "Personal", "Sport"],
-};
-
-const localInitialForm: IArticle = {
-  id: 0,
-  title: "",
-  category: "",
-  tags: [],
-  cover: "",
-  published: false,
-  scheduled: null,
-  richText: "",
-  localUrl: "",
-  views: 0,
 };
 
 export default function ArticleForm({
@@ -57,28 +50,54 @@ export default function ArticleForm({
 }) {
   const t = useTranslations("articles.article-form");
   const locale = useNavSetting((state) => state.lang);
-
-  const [closeModel, setCloseModel] = useState(false);
-  const [form, setForm] = useState<IArticle>(initialForm ?? localInitialForm);
   const { createArticle, updateArticle } = useArticles((state) => state);
+  const [closeModel, setCloseModel] = useState(false);
 
-  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const schema = yup.object({
+    id: yup.number(),
+    title: yup.string().required(t("title-required-msg")),
+    category: yup.string().required(t("category-required-msg")),
+    tags: yup.array().of(yup.string().required()).min(1, t("tags-required-msg")),
+    scheduled: yup.date().required(t("date-required-msg")),
+    cover: yup.string(),
+    published: yup.boolean(),
+    localUrl: yup.string(),
+    richText: yup.string(),
+    views: yup.number(),
+  });
 
-    if(!form.cover) {
-      errorToast(t('empty-cover-image'))
-      return 
-    }
+  type FormType = yup.InferType<typeof schema>;
 
+  const { handleSubmit, control, setValue, reset, formState, getValues } =
+    useForm<FormType>({
+      defaultValues: initialForm ?? {
+        id: 0,
+        title: "",
+        category: "",
+        scheduled: new Date(),
+        cover: "",
+        tags: [],
+        published: false,
+        richText: "",
+        localUrl: "",
+        views: 0,
+      },
+      resolver: yupResolver(
+        schema.pick(["title", "category", "tags", "scheduled"])
+      ),
+    });
+  const { errors, isSubmitting } = formState;
+
+  const onSubmit: SubmitHandler<FormType> = async (data) => {
     try {
       if (method === "POST") {
-        await createArticle(form);
+        await createArticle(data as IArticle);
         successToast(t("success-add"));
-        setForm(localInitialForm);
+        reset();
         delayChangeState(setCloseModel);
         return;
       }
-      await updateArticle(form.id, form);
+      await updateArticle(initialForm?.id ?? 0, data as IArticle);
       successToast(t("success-update"));
       delayChangeState(setCloseModel);
     } catch (err) {
@@ -93,7 +112,9 @@ export default function ArticleForm({
 
     try {
       const url = (await getFileUrl(e.target.files[0], ["jpeg", "png"])) ?? "";
-      setForm((prev) => ({ ...prev, cover: url, localUrl }));
+
+      setValue("cover", url);
+      setValue("localUrl", localUrl);
     } catch (err) {
       errorToast((err as Error).message);
     }
@@ -105,8 +126,8 @@ export default function ArticleForm({
       <Model.Window name="new-article">
         <form
           className="p-3 px-5 bg-white dark:bg-primary-dark shadow-xl rounded-lg max-h-[90vh] w-[90vw] md:w-full overflow-y-auto no-scrollbar transition-all duration-300"
-          onSubmit={onSubmit}
-          style={{}}
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
         >
           <Model.Close>
             <button className="flex justify-end w-full p-1 cursor-pointer dark:text-white ">
@@ -115,26 +136,44 @@ export default function ArticleForm({
           </Model.Close>
           {/* Title and Image */}
           <AnimateFromToRight className="flex flex-col md:flex-row gap-3 mb-2">
-            <MainInput
-              label={t("title")}
-              type="text"
-              placeHolder={t("title-placeholder")}
-              required
-              value={form.title}
-              onChange={(e) => setForm({ ...form, title: e.target.value })}
+            <Controller
+              name="title"
+              control={control}
+              render={({ field }) => (
+                <MainInput
+                  label={t("title")}
+                  type="text"
+                  placeHolder={t("title-placeholder")}
+                  error={errors.title?.message}
+                  required
+                  {...field}
+                />
+              )}
             />
+
             <div className="mb-1 flex flex-col w-full">
               <label className="text-primary dark:text-white mb-1">
                 {t("date")}
               </label>
-              <DatePicker
-                required
-                className="px-4 py-2 bg-white w-full text-secondary-dark dark:text-white dark:bg-transparent placeholder:text-sm dark:placeholder:text-white dark:border dark:border-white outline-hidden shadow-xs rounded-xs"
-                selected={form.scheduled}
-                locale={locale == "ar" ? arSA : enUS}
-                placeholderText={t("date-placeholder")}
-                onChange={(date) => setForm({ ...form, scheduled: date })}
+              <Controller
+                name="scheduled"
+                control={control}
+                render={({ field }) => (
+                  <DatePicker
+                    selected={field.value}
+                    onChange={(date) => field.onChange(date)}
+                    required
+                    className="px-4 py-2 bg-white w-full text-secondary-dark dark:text-white dark:bg-transparent placeholder:text-sm dark:placeholder:text-white dark:border dark:border-white outline-hidden shadow-xs rounded-xs"
+                    locale={locale === "ar" ? arSA : enUS}
+                    placeholderText={t("date-placeholder")}
+                  />
+                )}
               />
+              {errors.scheduled && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.scheduled.message}
+                </p>
+              )}
             </div>
           </AnimateFromToRight>
 
@@ -143,18 +182,25 @@ export default function ArticleForm({
             delay={0.2}
             className="flex flex-col md:flex-row gap-3 mb-4"
           >
-            <SelectInput
-              label={t("category")}
-              values={Categories[locale]}
-              onChange={(e) => setForm({ ...form, category: e.target.value })}
-              value={form?.category}
+            <Controller
+              name="category"
+              control={control}
+              render={({ field }) => (
+                <SelectInput
+                  label={t("category")}
+                  values={Categories[locale]}
+                  value={field.value}
+                  onChange={(e) => field.onChange(e.target.value)}
+                  error={errors.category?.message}
+                />
+              )}
             />
 
             <FileInputSecondary
               label={t("cover-image")}
               placeHolder={t("cover-image-placeholder")}
               onChange={handleFileSelected}
-              value={form.localUrl}
+              value={getValues("localUrl")}
             />
           </AnimateFromToRight>
 
@@ -163,27 +209,39 @@ export default function ArticleForm({
             delay={0.4}
             className="flex flex-col md:flex-row items-end gap-3 mb-2"
           >
-            <MultiSelectInput
-              label={t("tags")}
-              options={tags[locale]}
-              selectedValues={form.tags}
-              onChange={(values) => setForm({ ...form, tags: values })}
-              placeholder={t("tags-placeholder")}
+            <Controller
+              name="tags"
+              control={control}
+              render={({ field }) => (
+                <MultiSelectInput
+                  label={t("tags")}
+                  options={tags[locale]}
+                  selectedValues={field?.value || []}
+                  onChange={(values) => field.onChange(values)}
+                  placeholder={t("tags-placeholder")}
+                />
+              )}
             />
 
             <div className="flex items-center gap-2 justify-between w-full flex-1">
-              <label
-                onClick={() => setForm({ ...form, published: !form.published })}
-                htmlFor="toggle"
-                className="text-sm font-medium text-gray-800 dark:text-gray-200 text-nowrap"
-              >
-                {t(form.published ? "published" : "un-published")}
-              </label>
-              <ToggleButton
-                value={form.published}
-                onChangeFn={() =>
-                  setForm({ ...form, published: !form.published })
-                }
+              <Controller
+                name="published"
+                control={control}
+                render={({ field }) => (
+                  <>
+                    <label
+                      htmlFor="toggle"
+                      className="text-sm font-medium text-gray-800 dark:text-gray-200 text-nowrap cursor-pointer"
+                      onClick={() => field.onChange(!field.value)}
+                    >
+                      {t(field.value ? "published" : "un-published")}
+                    </label>
+                    <ToggleButton
+                      value={field.value || false}
+                      onChangeFn={() => field.onChange(!field.value)}
+                    />
+                  </>
+                )}
               />
             </div>
           </AnimateFromToRight>
@@ -193,21 +251,22 @@ export default function ArticleForm({
             delay={0.6}
             className="my-4 border border-gray-300 dark:border-white rounded-lg  bg-gray-50 dark:bg-secondary-dark w-full md:w-[50vw]"
           >
-            <CKEdite
-              setRichText={(data) => setForm({ ...form, richText: data })}
-              initalValue={form.richText}
-              placeholder={t("ckeditor-placeholder")}
+            <Controller
+              name="richText"
+              control={control}
+              render={({ field }) => (
+                <CKEdite
+                  setRichText={(data) => field.onChange(data)}
+                  initalValue={field.value || ""}
+                  placeholder={t("ckeditor-placeholder")}
+                />
+              )}
             />
           </AnimateFromToRight>
 
           {/* Submit Button */}
           <AnimateScale>
-            <button
-              type="submit"
-              className="w-full md:w-auto px-6 py-2 rounded-md bg-primary dark:bg-secondary-dark text-white hover:opacity-50 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all duration-300"
-            >
-              {t("confirm")}
-            </button>
+            <SubmitBtn lable={t("confirm")} isLoading={isSubmitting} />
           </AnimateScale>
         </form>
       </Model.Window>

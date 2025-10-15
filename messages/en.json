@@ -38,7 +38,11 @@
       "success-add": "Article added successfully!",
       "success-update": "Article updated successfully!",
       "ckeditor-placeholder": "Write the article description",
-      "empty-cover-image": "You should select the post's image"
+      "empty-cover-image": "You should select the post's image",
+      "title-required-msg": "Title is required",
+      "category-required-msg": "Category is required",
+      "tags-required-msg": "Please select at least one tag",
+      "date-required-msg": "Date is required"
     }
   },
   "settings": {
